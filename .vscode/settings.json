@@ -25,7 +25,7 @@
   ],
   "editor.parameterHints.enabled": false,
   "editor.renderLineHighlight": "gutter",
-  "cSpell.language": "en,pt",
+  "cSpell.language": "en,pt,pt-br",
   "typescript.updateImportsOnFileMove.enabled": "always",
   "editor.suggestSelection": "first",
   "explorer.confirmDelete": false,
@@ -71,7 +71,7 @@
   "editor.accessibilitySupport": "off",
   "explorer.confirmDragAndDrop": false,
   "terminal.integrated.fontSize": 14,
-  "terminal.integrated.fontFamily": "JetBrainsMono Nerd Font",
+  "terminal.integrated.fontFamily": "JetBrainsMono NF",
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
   },
