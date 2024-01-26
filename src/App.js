@@ -7,20 +7,20 @@ function App() {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
   
-  const checkValue = async (e) => {
+  //const checkValue = async (e) => {
+    async function checkValue(e){
     e.preventDefault(); // Impede o comportamento padrão do formulário
   
     try {
       const response = await fetch('http://localhost:3333/api/usuarios/gustavo@gmail.com');
-
       if (!response.ok) {
         throw new Error(`Erro na requisição: ${response.status} - ${response.statusText}`);
       }
-
+      console.log(response.status);
       const data = await response.json();
-      alert("email = " + data.email);
-      alert("senha = " + data.password);
+      console.log(data.password);
       const matchPass = await bcrypt.compare(pass, data.password);
+      console.log(matchPass);
       return matchPass;
     } catch (erro) {
       console.error('Erro ao obter dados:' + erro.message);
@@ -33,7 +33,6 @@ function App() {
         <div className="wrap-login">
           <form className="login-form">
             <span className="login-form-title">
-              Bem-Vindo
               <img src={logoKoala} alt="logoKoala" />
             </span>
             <div className="wrap-input">
@@ -57,11 +56,14 @@ function App() {
               <span className="focus-input" data-placeholder="Password"></span>
             </div>
             <div className="container-login-form-btn">
-              <button className="login-form-btn" onClick={(e) => checkValue(e)}>Login</button>
-            </div>
-            <div className="text-center">
-              <span className="txt1">Não possui conta? </span>
-              <a href="google.com" className="txt2">Clique aqui!</a>
+              <button className="login-form-btn"
+                onClick={async (e) => {
+                  const result = await checkValue(e);
+                  result
+                    ? alert("Login com sucesso")
+                    : alert("Email ou senha não confere")
+                }
+                }>Login</button>
             </div>
           </form>
         </div>

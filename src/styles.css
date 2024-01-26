@@ -2,8 +2,14 @@
   margin:0;
   padding: 0;
   box-sizing: border-box;
-  font-family: JetBrains Mono;
+  font-family: sans-serif;
 }
+
+body, html {
+  margin: 0;
+  padding: 0;
+}
+
 .container{
   width: 100%;
   margin: 0 auto; 
@@ -12,20 +18,21 @@
 .container-login{
   width: 100%;
   min-height: 100vh;
+  /*overflow: hidden;*/
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  padding: 15px;
+  padding: 10px;
   background-color: #cdcdcd;
 }
 
 .wrap-login{
-  width: 390px;
-  background-color: #3333;
+  width: 50vh;
+  background-color: #000;
   border-radius: 10px;
   overflow: hidden;
-  padding: 77px 55px 33px 55px;
+  padding: 1px 55px 20px 55px;
   box-shadow: 0 5px 10px 0 rgba(0,0,0,0.2);
 }
 
@@ -78,7 +85,7 @@
   top: 0;
   left: 0;
   pointer-events: none;
-  color: #3333;
+  color: #fff;
 }
 
 .focus-input::before{
