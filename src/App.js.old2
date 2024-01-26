@@ -1,0 +1,69 @@
+import React, { useState, useEffect } from 'react';
+
+const MeuComponente = () => {
+  const [dados, setDados] = useState(null);
+  const [erro, setErro] = useState(null);
+  const [carregando, setCarregando] = useState(false); // Inicializado como falso
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Faz a requisição à API
+        const resposta = await fetch('http://localhost:3333/api/usuarios/gustavo@gmail.com');
+        
+        // Verifica se a resposta da requisição foi bem-sucedida
+        if (!resposta.ok) {
+          throw new Error(`Erro na requisição: ${resposta.status} - ${resposta.statusText}`);
+        }
+
+        // Converte a resposta para JSON
+        const dadosJson = await resposta.json();
+        alert(resposta.status);
+        alert(resposta.statusText);
+        alert(dadosJson.email);
+        alert(dadosJson.password);
+
+        // Atualiza o estado com os dados obtidos
+        setDados(dadosJson);
+        setCarregando(false); // Marca como não carregando após obter os dados
+      } catch (erro) {
+        console.error('Erro ao obter dados:', erro.message);
+        setErro('Erro ao obter dados. Verifique a console para mais detalhes.');
+        setCarregando(false); // Marca como não carregando em caso de erro
+      }
+    };
+
+    // Chama a função para fazer a requisição apenas se carregando for true
+    if (carregando) {
+      fetchData();
+    }
+  }, [carregando]);
+
+  const handleClick = () => {
+    // Define carregando como true para fazer a requisição quando o botão for clicado
+    setCarregando(true);
+  };
+
+  return (
+    <div>
+      <button onClick={handleClick}>Carregar Dados</button>
+      {erro ? (
+        <p>{erro}</p>
+      ) : (
+        <>
+          {dados ? (
+            <ul>
+              {dados.map((item) => (
+                <li key={item.id}>{item.nome}</li>
+              ))}
+            </ul>
+          ) : (
+            <p>Carregando dados...</p>
+          )}
+        </>
+      )}
+    </div>
+  );
+};
+
+export default MeuComponente;
